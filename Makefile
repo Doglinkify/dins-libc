@@ -1,4 +1,4 @@
-OBJS := stdio.o stdlib.o string.o
+OBJS := stdio.o stdlib.o string.o dlos_private.o ctype.o
 CFLAGS := -I./include -nostdinc -ffreestanding
 
 all: libdins.a crt0.o init.o fini.o
@@ -26,3 +26,9 @@ stdlib.o: stdlib.c include/stdlib.h
 
 string.o: string.c include/string.h
 	x86_64-dlos-gcc $(CFLAGS) -c string.c -o string.o
+
+dlos_private.o: dlos_private.c include/sys/dlos_private.h
+	x86_64-dlos-gcc $(CFLAGS) -c dlos_private.c -o dlos_private.o
+
+ctype.o: ctype.c include/ctype.h
+	x86_64-dlos-gcc $(CFLAGS) -c ctype.c -o ctype.o
